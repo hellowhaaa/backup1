@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    background-color: #ebebeb;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-nav {
+    display: flex;
+}
+
+.logo {
+    padding-left: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+li {
+    list-style-type: none;
+    padding: 0 20px;
+}
+
+.message {
+    background-color: #c9dceb;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.title {
+
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.box-container {
+    height: 240px;
+    /* background-color: yellowgreen; */
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-wrap: wrap;
+}
+
+.box {
+    background-color: #8796ab;
+    height: 100px;
+    width: 40%;
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+
+}
+
+.content-box1,
+.content-box2 {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    /* border: 2px solid black; */
+    justify-content: center;
+    align-items: center;
+
+}
+
+.action {
+    display: inline-flex;
+    background-color: #dcecff;
+    padding: 20px;
+
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+
+}

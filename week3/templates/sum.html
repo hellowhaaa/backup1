@@ -1,15 +1,50 @@
 {% extends "layout.html" %}
 {% block content %}
-<form method="POST" action="{{url_for('save')}}" class="form">
+<form method="POST" action="{{url_for('sum')}}" class="form">
     <!-- 因為 inherit from FlaskForm 所以可以使用 form.number.label叫出裡面的字 -->
-    {{ form.hidden_tag()}}
+
     <h1> This is sum page qqqq</h1>
     <p> Please enter a number below!</p>
 
     <label for="number" name="number"> Number: </label>
-    <input type="text" name="number">
-    <input type="submit" value="Submit">
+    <input type="text" name="number" id="btn">
+    <input type="submit" value="Submit" id="btn">
 
 
 </form>
+
+<script>
+    (function () {
+        var httpRequest;
+        document
+            .getElementById("btn")
+            .addEventListener("click", makeRequest);
+
+        function makeRequest() {
+            httpRequest = new XMLHttpRequest();
+
+            if (!httpRequest) {
+                alert("Giving up :( Cannot create an XMLHTTP instance");
+                return false;
+            }
+            httpRequest.onreadystatechange = alertContents;
+            httpRequest.open("GET", "sum.html");
+            httpRequest.send();
+        }
+
+        function alertContents() {
+            if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                if (httpRequest.status === 200) {
+                    alert(httpRequest.responseText);
+                } else {
+                    alert("There was a problem with the request.");
+                }
+            }
+        }
+    })();
+
+
+
+
+</script>
 {% endblock %}

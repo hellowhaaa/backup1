@@ -15,7 +15,8 @@ app.secret_key = 'sdfjiohdgssdkghnlsdhildfs'
 @app.route('/')
 def index():
     word = 'Hello, My Server'
-    return render_template('first_page.html', word=word)
+    data = get_saved_data()
+    return render_template('first_page.html', word=word, saves = data)
 
 
 @app.route('/data', methods=['GET'])
@@ -34,8 +35,10 @@ def data():
 @app.route('/save', methods=['POST'])
 def save():
     # import pdb; pdb.set_trace()
-    response = make_response(redirect(url_for('index')))
-    response.set_cookie('character', json.dumps(dict(request.form.items())))
+    response = make_response(redirect(url_for('result')))
+    data = get_saved_data()
+    data.update(dict(request.form.items()))
+    response.set_cookie('character', json.dumps(data))
     # 給cookie 腳色名稱
     return response
     # number = 0
@@ -49,18 +52,29 @@ def save():
     # return render_template('sum.html', form=form, number = number)
 
 
-# @app.route('/sum.html', methods =['GET', 'POST'])
-# def sumup():
-#     if request.method == 'POST':
-#         return 'Hello' + request.values['number']
-#     return render_template('sum.html')
 
-
-
-@app.route('/result',methods=['POST'])
+@app.route('/result')
 def result():
-    number = request.args.get('number')  # 從HTML 抓 name= number 
-    return render_template('result.html', number = number)
+    # number = request.args.get('number')  # 從HTML 抓 name= number 
+
+    return render_template('result.html', saves = get_saved_data())
+
+
+
+
+
+
+
+####################################
+
+
+
+def get_saved_data():
+    try:
+        data = json.loads(request.cookies.get('character'))
+    except TypeError: #若不是cookie得到我們不能轉成jason的東西的話
+        data = {}
+    return data
 
 
 

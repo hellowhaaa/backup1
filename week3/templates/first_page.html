@@ -3,14 +3,14 @@
 
 {{ word }}
 
-<form method="POST" action="{{url_for('result')}}">
+<form method="POST" action="{{url_for('save')}}">
     <!-- 因為 inherit from FlaskForm 所以可以使用 form.number.label叫出裡面的字 -->
 
     <h1> This is sum page qqqq</h1>
     <p> Please enter a number below!</p>
 
-    <label for="number" name="number"> Number: </label>
-    <input type="text" name="number">
+    <label for="number11" name="number33"> Number: </label>
+    <input type="text" name="request_key" value="{{ saves.get('request_key','')}}">
     <input type="submit" value="Submit">
 
 

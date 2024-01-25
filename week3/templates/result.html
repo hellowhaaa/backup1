@@ -1,7 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1> Result</h1>
+<h3>
+    This is request_key from first.page -> save[methods = 'POST'] -> redirect -> result.html
+</h3>
+<br>
+{{ saves.get('request_key','')}}
 
-{{ number}}
+
 
 {% endblock %}

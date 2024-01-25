@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="get-btn">GET Data</button>
+    <button id="post-btn"> POST Data</button>
+    <h1> hello</h1>
+    <script>
+        (function () {
+            var xhr;
+            document
+                .getElementById("get-btn")
+                .addEventListener("click", makeRequest);
+
+            function makeRequest() {
+                xhr = new XMLHttpRequest();
+                if (!xhr) {
+                    alert("Giving up :( Cannot create an XMLHTTP instance");
+                    return false;
+                }
+                xhr.onreadystatechange = alertContents;
+                xhr.open('GET', 'http://127.0.0.1:2000/data?number=10');
+                xhr.onload = () => {
+                    // console.log(xhr.response)  
+                    // 點擊之後得到 JSON data
+                    const data = JSON.parse(xhr.response);
+                    console.log(data);
+                }
+                xhr.send();
+            }
+
+
+            function alertContents() {
+                try {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            alert(xhr.responseText);
+                        } else {
+                            alert("There was a problem with the request.");
+                        }
+                    }
+                }
+                catch (e) {
+                    alert("Caught Exception: " + e.description);
+                }
+            }
+        })();
+
+
+
+    </script>
+</body>
+
+</html>

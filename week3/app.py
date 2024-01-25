@@ -51,7 +51,7 @@ def save():
 
 
 
-@app.route('/result')
+@app.route('/result',methods=['POST'])
 def result():
     number = request.args.get('number')  # 從HTML 抓 name= number 
     return render_template('result.html', number = number)

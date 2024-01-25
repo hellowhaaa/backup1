@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<form method="POST" action="{{url_for('save')}}" class="form">
+    <!-- 因為 inherit from FlaskForm 所以可以使用 form.number.label叫出裡面的字 -->
+    {{ form.hidden_tag()}}
+    <h1> This is sum page qqqq</h1>
+    <p> Please enter a number below!</p>
+
+    <label for="number" name="number"> Number: </label>
+    <input type="text" name="number">
+    <input type="submit" value="Submit">
+
+
+</form>
+{% endblock %}

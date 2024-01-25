@@ -1,7 +1,9 @@
-from flask import Flask, redirect, url_for, session, render_template, request, flash
+from flask import Flask, redirect, url_for, session, render_template, request, flash, make_response
+
 import forms
 import models
 from forms import SumUpForm
+import json
 
 DEBUG = True
 LOCAL_HOST = ''
@@ -31,7 +33,11 @@ def data():
 # GTE POST pass the form to the template
 @app.route('/save', methods=['POST'])
 def save():
-    return 'saved from route'
+    # import pdb; pdb.set_trace()
+    response = make_response(redirect(url_for('index')))
+    response.set_cookie('character', json.dumps(dict(request.form.items())))
+    # 給cookie 腳色名稱
+    return response
     # number = 0
     # form = SumUpForm()
     # # number = request.args.get('number')

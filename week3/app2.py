@@ -53,10 +53,10 @@ def index():
 
 @app.route('/data', methods=['GET','POST'])
 def data():
-    if request.method =='POST':
-        number = request.form.get('number', type=int)
-        number = ((1+number) * number) // 2
-        return render_template('data.html', number = str(number))
+    # if request.method =='POST':
+    #     number = request.form.get('number', type=int)
+    #     number = ((1+number) * number) // 2
+    #     return render_template('data.html', number = str(number))
 
     number = request.args.get('number')
     if number is None:
@@ -75,9 +75,9 @@ def data():
 def sum():
     if request.method =='POST':
         number = request.form.get('number', type=int)
-        if number:
-            number = ((1+number) * number) // 2
-            return render_template('sum.html',number = number)
+        # if number:
+        #     number = ((1+number) * number) // 2
+            # return render_template('sum.html',number = number)
     return render_template('sum.html')
 
 @app.route('/result',methods=['GET'])
@@ -86,10 +86,9 @@ def result():
 
     return jsonify(cities)
 
-
-@app.route('/index2', methods=['GET','POST'])
-def index2():
-    return render_template('index.html')
+@app.route('/<myName>')
+def my_name(myName):
+    return render_template('myname.html', myName = myName)
 
 
 

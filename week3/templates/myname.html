@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1> This is username page!</h1>
+<br>
+<h3> {{ myName }}'s page!</h3>
+
+<form action="{{url_for('myname')}}" method="POST">
+    <p>
+    <h3>Enter userID</h3>
+    </p>
+    <p><input type='text' name='key' value="{{ saves.get('key', '') }}"></p>
+    <p><input type='submit' value='Login'></p>
+</form>
+
+
+{% endblock %}

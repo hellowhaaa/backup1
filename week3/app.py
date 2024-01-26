@@ -18,7 +18,7 @@ def index():
     data = get_saved_data()
     return render_template('first_page.html', word=word, saves = data)
 
-
+@app.route('/data/<number>', methods=['GET'])
 @app.route('/data', methods=['GET'])
 def data():
     number = request.args.get('number')
@@ -29,7 +29,7 @@ def data():
     else:
         number = int(number)
         number = ((1+number) * number) // 2
-    return render_template('data.html', number=number)
+    return render_template('data.html', numberqq=number)
 
 # GTE POST pass the form to the template
 @app.route('/save', methods=['POST'])

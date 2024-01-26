@@ -51,10 +51,15 @@ def index():
     return render_template('first_page.html', word=word)
 
 
-@app.route('/data', methods=['GET'])
+@app.route('/data', methods=['GET','POST'])
 def data():
+    if request.method =='POST':
+        number = request.form.get('number', type=int)
+        number = ((1+number) * number) // 2
+        return render_template('data.html', number = str(number))
+
     number = request.args.get('number')
-    if not number:
+    if number is None:
         number = 'Lack of Parameter'
     elif number.isalpha():
         number = 'Wrong Parameter'
@@ -66,10 +71,14 @@ def data():
     return jsonify(list[0])
 
 
-@app.route('/sum.html', methods=['GET'])
+@app.route('/sum.html', methods=['GET','POST'])
 def sum():
+    if request.method =='POST':
+        number = request.form.get('number', type=int)
+        if number:
+            number = ((1+number) * number) // 2
+            return render_template('sum.html',number = number)
     return render_template('sum.html')
-
 
 @app.route('/result',methods=['GET'])
 def result():

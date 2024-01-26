@@ -7,44 +7,69 @@
     <p> Please enter a number below!</p>
 
     <label for="number" name="number"> Number: </label>
-    <input type="text" name="number" id="btn">
-    <input type="submit" value="Submit" id="btn">
-
+    <input type="text" name="number" class="number" id="text">
+    <input type="submit" value="Submit" id="get-btn" class="number">
 
 </form>
 
+
+{% if number %}
+<h1>Answer: {{number}}</h1>
+
+{% endif %}
+
 <script>
     (function () {
-        var httpRequest;
+        var xhr;
         document
-            .getElementById("btn")
+            .getElementById("get-btn")
             .addEventListener("click", makeRequest);
+        // let number = document.querySelector('.number')
 
         function makeRequest() {
-            httpRequest = new XMLHttpRequest();
-
-            if (!httpRequest) {
+            var number = document.getElementById('text').value
+            xhr = new XMLHttpRequest();
+            if (!xhr) {
                 alert("Giving up :( Cannot create an XMLHTTP instance");
                 return false;
             }
-            httpRequest.onreadystatechange = alertContents;
-            httpRequest.open("GET", "sum.html");
-            httpRequest.send();
-        }
+            xhr.onreadystatechange = alertContents;
+            xhr.open('GET', 'http://127.0.0.1:2000/data?number=' + number, true);
+            xhr.onload = () => {
+                // console.log(xhr.response)  
+                // 點擊之後得到 JSON data
+                const data = JSON.parse(xhr.response);
+                console.log(data);
+            }
+            xhr.send();
 
-        function alertContents() {
-            if (httpRequest.readyState === XMLHttpRequest.DONE) {
-                if (httpRequest.status === 200) {
-                    alert(httpRequest.responseText);
-                } else {
-                    alert("There was a problem with the request.");
+            //     xhr.open('POST', 'http://127.0.0.1:2000/data?number=' + number, true);
+            //     xhr.setRequestHeader(
+            //         "Content-Type",
+            //         "application/x-www-form-urlencoded",
+            //     );
+            //     xhr.send("number=" + document.getElementById('text').value);
+            // }
+
+
+            function alertContents() {
+                try {
+
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            // const htmlContent = document.getElementById('result-container').innerHTML;
+                            // xhr.responseText = htmlContent
+                            // alert(xhr.responseText);
+                        } else {
+                            alert("There was a problem with the request.");
+                        }
+                    }
+                }
+                catch (e) {
+                    alert("Caught Exception: " + e.description);
                 }
             }
         }
     })();
-
-
-
-
 </script>
 {% endblock %}

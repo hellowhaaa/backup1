@@ -12,11 +12,11 @@
 
 </form>
 
-
-{% if number %}
+<p class='result'>Answer: <span class="answer"></span></p>
+<!-- {% if number %}
 <h1>Answer: {{number}}</h1>
 
-{% endif %}
+{% endif %} -->
 
 <script>
     (function () {
@@ -28,6 +28,7 @@
 
         function makeRequest() {
             var number = document.getElementById('text').value
+            console.log(number)
             xhr = new XMLHttpRequest();
             if (!xhr) {
                 alert("Giving up :( Cannot create an XMLHTTP instance");
@@ -35,15 +36,21 @@
             }
             xhr.onreadystatechange = alertContents;
             xhr.open('GET', 'http://127.0.0.1:2000/data?number=' + number, true);
+
+            xhr.send();
+
             xhr.onload = () => {
                 // console.log(xhr.response)  
                 // 點擊之後得到 JSON data
-                const data = JSON.parse(xhr.response);
-                console.log(data);
+                console.log('成功仔入')
+                console.log(xhr.responseText)
+                const data = JSON.parse(xhr.responseText);
+                // 陣列化
+                document.querySelector('.answer').textContent = data;
             }
-            xhr.send();
 
-            //     xhr.open('POST', 'http://127.0.0.1:2000/data?number=' + number, true);
+
+            //     xhr.open('POST', 'http://127.0.0.1:2000/data', true);
             //     xhr.setRequestHeader(
             //         "Content-Type",
             //         "application/x-www-form-urlencoded",
@@ -59,9 +66,9 @@
                         if (xhr.status === 200) {
                             // const htmlContent = document.getElementById('result-container').innerHTML;
                             // xhr.responseText = htmlContent
-                            // alert(xhr.responseText);
+                            alert(xhr.responseText);
                         } else {
-                            alert("There was a problem with the request.");
+                            // alert("There was a problem with the request.");
                         }
                     }
                 }

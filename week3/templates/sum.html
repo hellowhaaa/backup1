@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-<form method="POST" action="{{url_for('sum')}}" class="form">
+<form method="POST" class="form">
     <!-- 因為 inherit from FlaskForm 所以可以使用 form.number.label叫出裡面的字 -->
 
     <h1> This is sum page qqqq</h1>
@@ -39,14 +39,17 @@
 
             xhr.send();
 
+
             xhr.onload = () => {
                 // console.log(xhr.response)  
                 // 點擊之後得到 JSON data
                 console.log('成功仔入')
                 console.log(xhr.responseText)
-                const data = JSON.parse(xhr.responseText);
-                // 陣列化
+                var data = JSON.parse(xhr.responseText);
                 document.querySelector('.answer').textContent = data;
+
+                // 陣列化
+
             }
 
 
@@ -78,5 +81,6 @@
             }
         }
     })();
+
 </script>
 {% endblock %}

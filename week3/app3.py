@@ -55,10 +55,6 @@ def index():
 
 @app.route('/data', methods=['GET','POST'])
 def data():
-    # if request.method =='POST':
-    #     number = request.form.get('number', type=int)
-    #     number = ((1+number) * number) // 2
-    #     return render_template('data.html', number = str(number))
 
     number = request.args.get('number')
     if number is None:
@@ -73,42 +69,35 @@ def data():
     return jsonify(list[0])
 
 
-@app.route('/sum.html', methods=['GET','POST'])
+@app.route('/sum.html', methods=['GET', 'POST'])
 def sum():
-    if request.method =='POST':
+    if request.method == 'POST':
         number = request.form.get('number', type=int)
-        # if number:
-        #     number = ((1+number) * number) // 2
-            # return render_template('sum.html',number = number)
     return render_template('sum.html')
 
-# @app.route('/result',methods=['GET'])
-# def result():
-#     # number = request.args.get('number')  # 從HTML 抓 name= number 
 
-#     return jsonify(cities)
-
-@app.route('/myname', methods=['GET','POST'])
+@app.route('/myname', methods=['GET', 'POST'])
 def myname():
     data = get_saved_data()
-    return render_template('myname.html',saves=data)
-
-# @app.route('/getcookie')
-# def getcookie():
-#    name = request.cookies.get('userID')
-#    return '<h1>welcome ' + name + '</h1>'
+    if request.method == "POST":
+        return render_template("myname.html", saves=data, input_name=data)
+    else:
+        return render_template("myname.html",saves=data)
 
 
 @app.route('/trackName', methods=['POST'])
 def trackName():
-    # import pdb; pdb.set_trace()
-    response = make_response(redirect(url_for('myname')))
-    data = get_saved_data()
-    data.update(dict(request.form.items()))
-    response.set_cookie('Name1', json.dumps(data))
-    # request.form -> immutable Multi Dict -> items() -> tuple key value pair
-    # 轉乘json string
-    return response
+    if request.method == 'POST':
+        input_name = request.form["name"]
+
+        # HTTP, Set Cookie
+        response = make_response(redirect(url_for('myname')))
+        data = get_saved_data()
+        data.update(dict(request.form.items()))
+        response.set_cookie('Name1', json.dumps(data))
+        # request.form -> immutable Multi Dict -> items() -> tuple key value pair
+        # 轉乘json string
+        return response
 
 
 def get_saved_data():
@@ -127,4 +116,4 @@ def get_saved_data():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=2000)
+    app.run(debug=True, port=9000)

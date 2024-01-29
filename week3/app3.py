@@ -88,10 +88,10 @@ def myname():
 @app.route('/trackName', methods=['POST'])
 def trackName():
     if request.method == 'POST':
-        input_name = request.form["name"]
+        input_name = request.args.get("input_name")
 
         # HTTP, Set Cookie
-        response = make_response(redirect(url_for('myname')))
+        response = make_response(redirect(url_for('myname', input_name=input_name)))
         data = get_saved_data()
         data.update(dict(request.form.items()))
         response.set_cookie('Name1', json.dumps(data))

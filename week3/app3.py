@@ -76,28 +76,75 @@ def sum():
     return render_template('sum.html')
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route('/myname', methods=['GET', 'POST'])
 def myname():
     data = get_saved_data()
     if request.method == "POST":
-        return render_template("myname.html", saves=data, input_name=data)
+        return render_template("result.html", saves=data, input_name=data)
     else:
-        return render_template("myname.html",saves=data)
+        return render_template("myname.html", saves=data)
 
 
-@app.route('/trackName', methods=['POST'])
+# @app.route('/trackName', methods=['POST'])
+# def trackName():
+#     if request.method == 'POST':
+#         input_name = request.args.get("input_name")
+#
+#         # HTTP, Set Cookie
+#         response = make_response(redirect(url_for('result', input_name=input_name)))
+#         data = get_saved_data()
+#         data.update(dict(request.form.items()))
+#         response.set_cookie('Name1', json.dumps(data))
+#         # request.form -> immutable Multi Dict -> items() -> tuple key value pair
+#         # 轉乘json string
+#         return response
+
+
+@app.route('/trackName', methods=['POST', 'GET'])
 def trackName():
     if request.method == 'POST':
         input_name = request.args.get("input_name")
 
         # HTTP, Set Cookie
-        response = make_response(redirect(url_for('myname', input_name=input_name)))
+        response = make_response(redirect(url_for('result', input_name=input_name)))
         data = get_saved_data()
         data.update(dict(request.form.items()))
         response.set_cookie('Name1', json.dumps(data))
         # request.form -> immutable Multi Dict -> items() -> tuple key value pair
         # 轉乘json string
         return response
+
+
+
+@app.route('/result', methods=['POST', 'GET'])
+def result():
+    input_name2, input_name = None, None
+    if request.method == 'POST':
+        input_name2 = request.form['name']
+    else:
+        input_name = request.args.get("input_name")
+    return render_template('result.html', input_name=input_name, input_name2=input_name2)
+
+
+
+
+
+
+
+
 
 
 def get_saved_data():

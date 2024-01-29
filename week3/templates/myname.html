@@ -5,7 +5,7 @@
 <br>
 
 
-<form action="{{url_for('trackName')}}" method="POST">
+<form action="{{url_for('result')}}" method="POST">
     <p>
     <h3>Enter userID</h3>
     </p>
@@ -13,8 +13,10 @@
     <p><input type='submit' value='Login'></p>
 </form>
 
-{% if saves.get('name',"") %}
-<h3> welcome back {{saves.get('name') }}</h3>
+{% if saves.get('name') %}
+<h3> welcome back {{saves.get('name',"") }}</h3>
 {% endif %}
 
+
+<h1> this is input name {{ input_name }}</h1>
 {% endblock %}

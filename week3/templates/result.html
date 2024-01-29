@@ -1,10 +1,13 @@
-{% extends "layout.html" %}
-{% block content %}
-<h1> Result</h1>
+{% extends "layout.html" %} {% block content %}
+<h1>Result</h1>
 <h3>
-    This is request_key from first.page -> save[methods = 'POST'] -> redirect -> result.html
+  This is request_key from first.page -> save[methods = 'POST'] -> redirect ->
+  result.html
 </h3>
-<br>
 
+{% if input_name %}
+<h1>{{ input_name}}</h1>
 
-{% endblock %}
+{% endif %} {% if input_name2 %}
+<h1>{{ input_name2}}</h1>
+{% endif %} {% endblock %}

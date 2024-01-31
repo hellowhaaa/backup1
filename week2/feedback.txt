@@ -1,0 +1,11 @@
+在寫 assignment1 時, 其實沒特別注意到for loop裡是用var 還是let 去定義
+但後來才想起 全域變數和 區域變數 這回事
+
+let vs var
+作用域就是「變數有效的作用範圍」
+1. var 具有「函式作用域」, let 具有「區塊作用域」, 兩者若在函式中宣告變數，有效作用範圍會被限制在該函式中,
+但var 用於某些區塊語法, 例如:for,if等等.. 會感染在全域中的變數, 這是let做不到的
+2. var可以重複宣告變數 , let 不行, 會出現"variable has been declared"
+使用太多var的話, 當我們程式碼越來越多時, 因為有可能會忘了在哪個地方曾經宣告過同名稱的變數，
+以致前面的函式被覆蓋新值而造成錯誤
+https://hackmd.io/@bookbasketball/SJ1lqTzSt

@@ -14,37 +14,6 @@ app.secret_key = 'sdfjiohdgssdkghnlsdhidfs'
 
 
 
-# tpe = {
-#     "id": 0,
-#     "city_name": "Taipei",
-#     "country_name": "Taiwan",
-#     "is_capital": True,
-#     "location": {
-#         "longitude": 121.569649,
-#         "latitude": 25.036786
-#     }
-# }
-# nyc = {
-#     "id": 1,
-#     "city_name": "New York",
-#     "country_name": "United States",
-#     "is_capital": False,
-#     "location": {
-#         "longitude": -74.004364,
-#         "latitude": 40.710405
-#     }
-# }
-# ldn = {
-#     "id": 2,
-#     "city_name": "London",
-#     "country_name": "United Kingdom",
-#     "is_capital": True,
-#     "location": {
-#         "longitude": -0.114089,
-#         "latitude": 51.507497
-#     }
-# }
-# cities = [tpe, nyc, ldn]
 
 @app.route('/')
 def index():
@@ -55,7 +24,6 @@ def index():
 
 @app.route('/data', methods=['GET', 'POST'])
 def data():
-
     number = request.args.get('number')
     if number is None:
         number = 'Lack of Parameter'
@@ -85,21 +53,6 @@ def myname():
         return render_template("myname.html")
 
 
-# @app.route('/trackName', methods=['POST'])
-# def trackName():
-#     if request.method == 'POST':
-#         input_name = request.args.get("input_name")
-#
-#         # HTTP, Set Cookie
-#         response = make_response(redirect(url_for('result', input_name=input_name)))
-#         data = get_saved_data()
-#         data.update(dict(request.form.items()))
-#         response.set_cookie('Name1', json.dumps(data))
-#         # request.form -> immutable Multi Dict -> items() -> tuple key value pair
-#         # 轉乘json string
-#         return response
-
-
 @app.route('/trackName', methods=['POST', 'GET'])
 def trackName():
     if request.method == 'POST':
@@ -110,20 +63,6 @@ def trackName():
     else:
         name = request.args.get("name")
         return render_template('myname.html', name=name)
-
-#
-#
-# @app.route('/result', methods=['POST', 'GET'])
-# def result():
-#     input_name2, input_name = None, None
-#     if request.method == 'POST':
-#         input_name2 = request.form['name']
-#     else:
-#         input_name = request.args.get("input_name")
-#     return render_template('result.html', input_name=input_name, input_name2=input_name2)
-
-
-
 
 
 if __name__ == "__main__":

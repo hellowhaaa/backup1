@@ -41,13 +41,19 @@ console.log('It\'s from JS!')
                 return false;
             }
             httpRequest.onreadystatechange = alertContents;
+//            只要有東西改變 ex 刷頁面 輸入東西等等
             httpRequest.open("GET", "http://127.0.0.1:2000/");
             httpRequest.send();
+//            send the request
+
+
         }
 
         function alertContents() {
             if (httpRequest.readyState === XMLHttpRequest.DONE) {
+//            readyState 從0~4 要=4 代表 Data is received
                 if (httpRequest.status === 200) {
+//                代表 HTTP OK
                     alert(httpRequest.responseText);
                 } else {
                     alert("There was a problem with the request.");

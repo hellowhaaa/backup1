@@ -14,7 +14,7 @@ def find_position(numbers, target):
     return '-1'
 
 
-print(find_max([1, 2, 4, 5]))
+print(find_max([]))
 print(find_max([5, 2, 7, 1, 6]))
 
 print(find_position([5, 2, 7, 1, 6], 5))

@@ -67,6 +67,8 @@ def data():
     list = []
     list.append(number)
     return jsonify(list[0])
+# The jsonify() function is useful in Flask apps because it automatically 
+# sets the correct response headers and content type for JSON responses,
 
 
 @app.route('/sum.html', methods=['GET', 'POST'])

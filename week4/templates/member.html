@@ -1,6 +1,7 @@
 {% extends "layout.html" %} {% block content %}
 
 <h1>This is member page!</h1>
-<p>your secret email: {{ ans }}</p>
 
-{% endblock %}
+{% if ans %}
+<p>Welcome back {{ ans }}</p>
+{% endif %} {% endblock %}

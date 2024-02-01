@@ -1,15 +1,29 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %} {% block content %} {% if wrong %}
+
+<h2>{{wrong}}</h2>
+{% else %}
 
 <h1>Sign in to get more information!</h1>
 <form method="post" action="{{url_for('member')}}">
   <label for="email">Email:</label>
-  <input type="text" id="email" name="email" />
+  <input type="text" id="email" name="email"/>
   <label for="password">Password:</label>
-  <input type="text" id="password" name="password" />
+  <input type="text" id="password" name="password"/>
 
   <button type="submit" class="btn">Submit</button>
 </form>
-<br />
-<a href="{{url_for('sign_up')}}"> Don't have an account? Sign up here!</a>
+<div style="margin:100px"></div>
 
-{% endblock %}
+<h1>Don't have an account? Sign up below!</h1>
+
+<form method="post" action="{{url_for('member')}}">
+  <label for="email-sign-up">Email:</label>
+  <input type="text" id="email-sign-up" name="email" />
+  <label for="password">Password:</label>
+  <input type="text" id="password-sign-up" name="password" />
+
+  <button type="submit" class="btn"> Submit</button>
+</form>
+
+
+{% endif %} {% endblock %}

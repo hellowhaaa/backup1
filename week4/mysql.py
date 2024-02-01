@@ -1,5 +1,5 @@
 import pymysql.cursors
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect,url_for
 
 db = pymysql.connect(host='localhost',
                      user='root',
@@ -59,11 +59,14 @@ app.secret_key = 'dfssdgfgd'
 
 @app.route('/')
 def index():
-    return render_template('mysql.html')
+    wrong = request.args.get('wrong')
+    return render_template('mysql.html', wrong=wrong)
 
 
 @app.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():
+    email = request.form.get('email')
+    password = request.form.get('password')
     return render_template('signup.html')
 
 
@@ -72,13 +75,22 @@ def member():
     email = request.form.get('email')
     password = request.form.get('password')
     if request.method == 'POST':
-        query2 = "SELECT `email` FROM `user` WHERE `email`=%s"
-        my_cursor.execute(query2, email)
-        ans = ''
-        for row in my_cursor:
-            ans = row['email']
-            print(row['email'])
-        return render_template('member.html', ans=ans)
+        query2 = "SELECT `email` FROM `user` WHERE `email`=%s AND `password`=%s"
+        my_cursor.execute(query2, (email, password))
+        row = my_cursor.fetchone()
+        if row is None:
+            wrong = 'Your email or password is wrong'
+            return redirect(url_for('index', wrong=wrong))
+        else:
+            ans = ''
+            my_cursor.execute(query2, (email, password))
+            for row2 in my_cursor:
+                ans = row2['email']
+                print(row2['email'])
+            return render_template('member.html', ans=ans)
+
+
+
 
 
 if __name__ == '__main__':

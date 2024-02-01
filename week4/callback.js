@@ -24,3 +24,15 @@ setTimeout(
   () => firstAction(() => secondAction("I am second 222"), "I am first 111"),
   1500
 );
+
+// call back button
+button = document.querySelector("button");
+const alertMe = () => {
+  console.log("You clicked me!");
+};
+
+function alertMe() {
+  console.log("You clicked me!");
+}
+
+button.addEventListener("click", alertMe);

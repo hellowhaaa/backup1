@@ -28,6 +28,17 @@
 // }
 
 // 第一版
+
+button = document.querySelector(".btn");
+button.addEventListener("click", () =>
+  ajax(
+    "https://remote-assignment.s3.ap-northeast-1.amazonaws.com/products",
+    function (response) {
+      render(response);
+    }
+  )
+);
+
 function ajax(src, callback) {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", src, true);
@@ -59,12 +70,12 @@ function render(data) {
   });
 }
 
-ajax(
-  "https://remote-assignment.s3.ap-northeast-1.amazonaws.com/products",
-  function (response) {
-    render(response);
-  }
-);
+// ajax(
+//   "https://remote-assignment.s3.ap-northeast-1.amazonaws.com/products",
+//   function (response) {
+//     render(response);
+//   }
+// );
 
 // 第二版
 // function ajax(src, callback) {

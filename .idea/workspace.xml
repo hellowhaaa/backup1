@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f5fcbacf-5aec-4f9a-a3b7-235bf84615f5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/week4/AJAX.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/week4/AJAX.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/week4/assignment1_thread.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/week4/assignment2_call.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/week4/assignment2_call.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/week4/callback.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/week4/callback.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/week4/products" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/week4/mysql.py" beforeDir="false" afterPath="$PROJECT_DIR$/week4/mysql.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/week4/templates/member.html" beforeDir="false" afterPath="$PROJECT_DIR$/week4/templates/member.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

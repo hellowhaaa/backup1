@@ -13,7 +13,10 @@ delete_existing_table = "drop table if exists user"
 # Create a database
 # my_cursor.execute("CREATE DATABASE assignment")
 
-# create table
+
+
+
+# Create table
 # try:
 #     my_cursor.execute(delete_existing_table)
 #     print("existing table has been deleted")
@@ -27,8 +30,27 @@ delete_existing_table = "drop table if exists user"
 #     print('exeception occured: ', e)
 # my_cursor.close()
 
-# Create a new record
+# Create a new record and iterate!!!!!!
+# email = 'wang@gmail.com'
+# password = 'password32111'
+# query = "INSERT INTO `user` (`email`, `password`) VALUES ('wang@gmail.com', 'password32111')"
+# query2 = "INSERT INTO `user` (`email`, `password`) VALUES (%s, %s)" % (email, password)
+# my_cursor.execute(query)
+# db.commit()
 
+
+# Delete rows
+# query3 = "DELETE FROM `user` WHERE email='wang@gmail.com'"
+# my_cursor.execute(query3)
+# db.commit()
+
+
+# query2 = "SELECT `password` FROM `user` WHERE `email`=%s"
+# my_cursor.execute(query2, ('wang@gmail.com',))
+# # first_row = my_cursor.fetchone()  # 只會return first row, return tuple 或是 None
+# # print(first_row)
+# for row in my_cursor:
+#     print(row['password'])
 
 
 app = Flask(__name__)
@@ -50,10 +72,13 @@ def member():
     email = request.form.get('email')
     password = request.form.get('password')
     if request.method == 'POST':
-        if email
-
-        return render_template('member.html')
-
+        query2 = "SELECT `email` FROM `user` WHERE `email`=%s"
+        my_cursor.execute(query2, email)
+        ans = ''
+        for row in my_cursor:
+            ans = row['email']
+            print(row['email'])
+        return render_template('member.html', ans=ans)
 
 
 if __name__ == '__main__':

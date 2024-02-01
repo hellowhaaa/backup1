@@ -1,7 +1,13 @@
 {% extends "layout.html" %} {% block content %}
 
-<h1>This is member page!</h1>
 
-{% if ans %}
-<p>Welcome back {{ ans }}</p>
-{% endif %} {% endblock %}
+{% if new_email %}
+<h1> Welcome to this page {{ new_email }}</h1>
+{% endif %}
+
+{% if email %}
+<h1>Welcome back {{ email }}</h1>
+{% endif %}
+
+
+{% endblock %}

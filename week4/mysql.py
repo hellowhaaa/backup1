@@ -52,49 +52,49 @@ delete_existing_table = "drop table if exists user"
 # for row in my_cursor:
 #     print(row['password'])
 
-#
-# app = Flask(__name__)
-# app.secret_key = 'dfssdgfgd'
-#
-#
-# @app.route('/')
-# def index():
-#     wrong = request.args.get('wrong')
-#     return render_template('mysql.html', wrong=wrong)
-#
-#
-# @app.route('/sign_up', methods=['GET', 'POST'])
-# def sign_up():
-#     email = request.form.get('email')
-#     password = request.form.get('password')
-#     return render_template('signup.html')
-#
-#
-# @app.route('/member', methods=['GET', 'POST'])
-# def member():
-#     email = request.form.get('email')
-#     password = request.form.get('password')
-#     if request.method == 'POST':
-#         if request.values['send'] == 'submit-sign-in':  # if button's value is submit-sign-in
-#             query1 = "SELECT `email` FROM `user` WHERE `email`=%s AND `password`=%s"
-#             my_cursor.execute(query1, (email, password))
-#             if my_cursor.fetchone() is None:
-#                 wrong = 'Your email or password is wrong'
-#                 return redirect(url_for('index', wrong=wrong))
-#             else:
-#                 return render_template('member.html', email=email)
-#         else:  # if button's value is submit-sign-up
-#             query3 = "SELECT `email` FROM `user` WHERE `email`=%s"
-#             my_cursor.execute(query3, email)
-#             if my_cursor.fetchone():
-#                 wrong = 'The email address has been used!'
-#                 return redirect(url_for('index', wrong=wrong))
-#             else:
-#                 query2 = "INSERT INTO `user`(`email`, `password`) VALUES (%s, %s)"
-#                 my_cursor.execute(query2, (email, password))
-#                 db.commit()
-#                 return render_template('member.html', new_email=email)
-#
-#
-# if __name__ == '__main__':
-#     app.run(debug=True, port=4600)
+
+app = Flask(__name__)
+app.secret_key = 'dfssdgfgd'
+
+
+@app.route('/')
+def index():
+    wrong = request.args.get('wrong')
+    return render_template('mysql.html', wrong=wrong)
+
+
+@app.route('/sign_up', methods=['GET', 'POST'])
+def sign_up():
+    email = request.form.get('email')
+    password = request.form.get('password')
+    return render_template('signup.html')
+
+
+@app.route('/member', methods=['GET', 'POST'])
+def member():
+    email = request.form.get('email')
+    password = request.form.get('password')
+    if request.method == 'POST':
+        if request.values['send'] == 'submit-sign-in':  # if button's value is submit-sign-in
+            query1 = "SELECT `email` FROM `user` WHERE `email`=%s AND `password`=%s"
+            my_cursor.execute(query1, (email, password))
+            if my_cursor.fetchone() is None:
+                wrong = 'Your email or password is wrong'
+                return redirect(url_for('index', wrong=wrong))
+            else:
+                return render_template('member.html', email=email)
+        else:  # if button's value is submit-sign-up
+            query3 = "SELECT `email` FROM `user` WHERE `email`=%s"
+            my_cursor.execute(query3, email)
+            if my_cursor.fetchone():
+                wrong = 'The email address has been used!'
+                return redirect(url_for('index', wrong=wrong))
+            else:
+                query2 = "INSERT INTO `user`(`email`, `password`) VALUES (%s, %s)"
+                my_cursor.execute(query2, (email, password))
+                db.commit()
+                return render_template('member.html', new_email=email)
+
+
+if __name__ == '__main__':
+    app.run(debug=True, port=4600)

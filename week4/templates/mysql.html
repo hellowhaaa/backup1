@@ -1,0 +1,15 @@
+{% extends "layout.html" %} {% block content %}
+
+<h1>Sign in to get more information!</h1>
+<form method="post" action="{{url_for('member')}}">
+  <label for="email">Email:</label>
+  <input type="text" id="email" name="email" />
+  <label for="password">Password:</label>
+  <input type="text" id="password" name="password" />
+
+  <button type="submit" class="btn">Submit</button>
+</form>
+<br />
+<a href="{{url_for('sign_up')}}"> Don't have an account? Sign up here!</a>
+
+{% endblock %}

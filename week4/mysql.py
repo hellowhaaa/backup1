@@ -7,8 +7,9 @@ db = pymysql.connect(host='localhost',
                      database='assignment',
                      cursorclass=pymysql.cursors.DictCursor)
 my_cursor = db.cursor()
+print(my_cursor)
 
-delete_existing_table = "drop table if exists user"
+# delete_existing_table = "drop table if exists user"
 
 # Create a database
 # my_cursor.execute("CREATE DATABASE assignment")

@@ -1,5 +1,6 @@
 import pymysql.cursors
 from flask import Flask, render_template, request, redirect,url_for
+from flask_bcrypt import generate_password_hash, check_password_hash
 
 db = pymysql.connect(host='localhost',
                      user='root',
@@ -7,7 +8,7 @@ db = pymysql.connect(host='localhost',
                      database='assignment',
                      cursorclass=pymysql.cursors.DictCursor)
 my_cursor = db.cursor()
-print(my_cursor)
+# print(my_cursor)
 
 # delete_existing_table = "drop table if exists user"
 
@@ -15,13 +16,13 @@ print(my_cursor)
 # my_cursor.execute("CREATE DATABASE assignment")
 
 
-
-
-# Create table
+#
+#
+# # Create table
 # try:
-#     my_cursor.execute(delete_existing_table)
+#     # my_cursor.execute(delete_existing_table)
 #     print("existing table has been deleted")
-#     my_cursor.execute("CREATE TABLE user("
+#     my_cursor.execute("CREATE TABLE user_test("
 #                       "id int auto_increment primary key,"
 #                       "email varchar(255),"
 #                       "password varchar(255))")
@@ -64,35 +65,38 @@ def index():
     return render_template('mysql.html', wrong=wrong)
 
 
-@app.route('/sign_up', methods=['GET', 'POST'])
-def sign_up():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    return render_template('signup.html')
-
-
 @app.route('/member', methods=['GET', 'POST'])
 def member():
     email = request.form.get('email')
     password = request.form.get('password')
+    hashed_pw = generate_password_hash(password)
+    print(hashed_pw)
     if request.method == 'POST':
         if request.values['send'] == 'submit-sign-in':  # if button's value is submit-sign-in
-            query1 = "SELECT `email` FROM `user` WHERE `email`=%s AND `password`=%s"
-            my_cursor.execute(query1, (email, password))
-            if my_cursor.fetchone() is None:
+            query1 = "SELECT * FROM `user_test` WHERE `email`=%s"
+            my_cursor.execute(query1,(email, ))
+            result = my_cursor.fetchone()
+            if result is None:  # 沒有此email
                 wrong = 'Your email or password is wrong'
                 return redirect(url_for('index', wrong=wrong))
-            else:
-                return render_template('member.html', email=email)
+            else:  # 有email
+                print(result)
+              # 檢查password
+                print(result['password'])
+                if check_password_hash(result['password'], password):
+                    return render_template('member.html', email=email)
+                else:
+                    wrong = 'Your email or password is wrong'
+                    return redirect(url_for('index', wrong=wrong))
         else:  # if button's value is submit-sign-up
-            query3 = "SELECT `email` FROM `user` WHERE `email`=%s"
+            query3 = "SELECT `email` FROM `user_test` WHERE `email`=%s"
             my_cursor.execute(query3, email)
             if my_cursor.fetchone():
                 wrong = 'The email address has been used!'
                 return redirect(url_for('index', wrong=wrong))
             else:
-                query2 = "INSERT INTO `user`(`email`, `password`) VALUES (%s, %s)"
-                my_cursor.execute(query2, (email, password))
+                query2 = "INSERT INTO `user_test`(`email`, `password`) VALUES (%s, %s)"
+                my_cursor.execute(query2, (email, check_password_hash(hashed_pw, password)))
                 db.commit()
                 return render_template('member.html', new_email=email)
 

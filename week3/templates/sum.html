@@ -1,86 +1,20 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 <form method="POST" class="form">
-    <!-- 因為 inherit from FlaskForm 所以可以使用 form.number.label叫出裡面的字 -->
+  <!-- 因為 inherit from FlaskForm 所以可以使用 form.number.label叫出裡面的字 -->
 
-    <h1> This is sum page qqqq</h1>
-    <p> Please enter a number below!</p>
+  <h1>This is sum page qqqq</h1>
+  <p>Please enter a number below!</p>
 
-    <label for="number" name="number"> Number: </label>
-    <input type="text" name="number" class="number" id="text">
-    <input type="submit" value="Submit" id="get-btn" class="number">
-
+  <label for="number" name="number"> Number: </label>
+  <input type="text" name="number" class="number" id="text" />
+  <input type="submit" value="Submit" id="get-btn" class="number" />
 </form>
 
-<p class='result'>Answer: <span class="answer"></span></p>
+<p class="result">Answer: <span class="answer"></span></p>
 <!-- {% if number %}
 <h1>Answer: {{number}}</h1>
 
 {% endif %} -->
 
-<script>
-    (function () {
-        var xhr;
-        document
-            .getElementById("get-btn")
-            .addEventListener("click", makeRequest);
-        // let number = document.querySelector('.number')
-
-        function makeRequest() {
-            var number = document.getElementById('text').value
-            console.log(number)
-            xhr = new XMLHttpRequest();
-            if (!xhr) {
-                alert("Giving up :( Cannot create an XMLHTTP instance");
-                return false;
-            }
-            xhr.onreadystatechange = alertContents;
-            xhr.open('GET', 'http://127.0.0.1:2000/data?number=' + number, true);
-
-            xhr.send();
-
-
-            xhr.onload = () => {
-                // console.log(xhr.response)  
-                // 點擊之後得到 JSON data
-                console.log('成功仔入')
-                console.log(xhr.responseText)
-                var data = JSON.parse(xhr.responseText);
-                document.querySelector('.answer').textContent = data;
-
-                // 陣列化
-
-            }
-
-
-            //     xhr.open('POST', 'http://127.0.0.1:2000/data', true);
-            //     xhr.setRequestHeader(
-            //         "Content-Type",
-            //         "application/x-www-form-urlencoded",
-            //     );
-            //     xhr.send("number=" + document.getElementById('text').value);
-            // }
-
-
-            function alertContents() {
-                try {
-
-                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                        if (xhr.status === 200) {
-                            // const htmlContent = document.getElementById('result-container').innerHTML;
-                            // xhr.responseText = htmlContent
-                            alert(xhr.responseText);
-                        } else {
-                            // alert("There was a problem with the request.");
-                        }
-                    }
-                }
-                catch (e) {
-                    alert("Caught Exception: " + e.description);
-                }
-            }
-        }
-    })();
-
-</script>
+<script src="../static/app.js"></script>
 {% endblock %}

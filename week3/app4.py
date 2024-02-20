@@ -32,9 +32,7 @@ def data():
     else:
         number = int(number)
         number = ((1+number) * number) // 2
-    list = []
-    list.append(number)
-    return jsonify(list[0])
+    return jsonify(number)
 
 
 @app.route('/sum.html', methods=['GET', 'POST'])

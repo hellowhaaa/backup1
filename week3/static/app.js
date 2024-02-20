@@ -1,79 +1,19 @@
+document.getElementById("get-btn").addEventListener("click", makeRequest);
+function makeRequest() {
+  let number = document.getElementById("text").value;
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", "http://127.0.0.1:9000/data?number=" + number, true);
+  // open method initialize the request
+  // 1.what kind of the request
+  // 2. path of the data
+  // 3. if it's asynchronous
 
-console.log('It\'s from JS!')
-    // fetch("https://swapi.dev/api/people/1/")
-    //     .then((res) => {
-    //         console.log('Resolved', res);
-    //         return res.json()
-    //     })
-    //     .then((data) => {
-    //         console.log(data);
-    //     })
-    //     .cath((e) => {
-    //         console.log('Error!', e)
-    //     })
+  // xhr.onload -> handle the response
 
-    // const req = new XMLHttpRequest();
-
-    // req.onload = function() {
-    //     console.log('It loaded');
-    //     console.log(this);
-    // };
-
-    // req.onerror = function () {
-    //     console.log("ERROR!!");
-    //     console.log(this);
-    // };
-
-    // req.open("GET", "https://swapi.dev/api/people/1/");
-    // req.send()
-
-    (function () {
-        var httpRequest;
-        document
-            .getElementById("btn")
-            .addEventListener("click", makeRequest);
-
-        function makeRequest() {
-            httpRequest = new XMLHttpRequest();
-
-            if (!httpRequest) {
-                alert("Giving up :( Cannot create an XMLHTTP instance");
-                return false;
-            }
-            httpRequest.onreadystatechange = alertContents;
-//            只要有東西改變 ex 刷頁面 輸入東西等等
-            httpRequest.open("GET", "http://127.0.0.1:2000/");
-            httpRequest.send();
-//            send the request
-
-
-        }
-
-        function alertContents() {
-            if (httpRequest.readyState === XMLHttpRequest.DONE) {
-//            readyState 從0~4 要=4 代表 Data is received
-                if (httpRequest.status === 200) {
-//                代表 HTTP OK
-                    alert(httpRequest.responseText);
-                } else {
-                    alert("There was a problem with the request.");
-                }
-            }
-        }
-    })();
-
-
-const httpRequest = new XMLHttpRequest();
-function handler() {
-    // Process the server response here.
+  xhr.onload = function () {
+    if (xhr.status == 200) {
+      console.log("success");
+    }
+  };
+  xhr.send();
 }
-
-httpRequest.onreadystatechange = handler;
-
-httpRequest.open("GET", "http://www.example.org/some.file", true);
-httpRequest.send();
-
-httpRequest.setRequestHeader(
-    "Content-Type",
-    "application/x-www-form-urlencoded",
-);
